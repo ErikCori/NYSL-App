@@ -1,0 +1,286 @@
+/*-------------------------CSS--------------------------*/
+body {
+    font-family: "Verdana", "Geneva", "sans-serif";
+    background-image: url(images/pelota.png);
+  }
+  .container {
+    max-width: 100vw;
+  }
+  /* ---------------1 html page------------ */
+  #pages>section{
+    display: none;
+  }
+  #pages>section.current{
+    display: block;
+  }
+  section {
+    padding-top: 101px;
+    padding-bottom: 80px;
+    overflow: auto;
+  }
+  /* ---------------Header css------------ */
+  .fixed-top {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  header>div, .fixed-bottom {
+    background-color: black;
+  }
+  header>div:last-child {
+    background-color: #358728;
+  }
+  .logo {
+    width: 2.4em;
+    margin: 10px 0;
+  }
+  h1, h2 {
+    color: white;
+  }
+  h1 {
+    font-size: 1.5em;
+    margin: 15px 0;
+  }
+  h2 {
+    font-size: 1em;
+    margin: 12px 0;
+  }
+  #back-btn {
+    display: none;
+    padding: 5px 10px 5px 0;
+    height: 43px;
+  }
+  #back-btn.now-back{
+    display: inline;
+  }
+  /* ---------------footer css-------------- */
+  .navbar{
+    padding: 0;
+  }
+  .navbar-nav{
+    width: 70vw;
+  }
+  .nav-img-footer {
+    padding: 8px;
+    display: none;
+  }
+  .shownav {
+    display: inline;
+    height: 50px;
+  }
+  /* ---------------main css-------------- */
+  a[role="button"] {
+    height: 16vh;
+  }
+  .btn {
+    border-radius: 0;
+  }
+  section>a>img {
+    height: 14vh;
+    padding: 3.5vh 1.5vh;
+  }
+  a.btn, a.btn:hover, div>div>p>a, div>div>p>a:hover {
+    color: black;
+    text-decoration: none;
+  }
+  h5>a {
+    color: black;
+    text-decoration: underline;
+  }
+  h3 {
+    line-height: 14vh;
+    font-size: 2em;
+    margin: 0 0 0 0.3em;
+  }
+  section>div>p {
+    text-align: center;
+    padding-top: 8px;
+  }
+  div.accordion {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  div.accordion>div {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+  }
+  div.accordion>button:nth-of-type(odd), section>a[role="button"]:nth-of-type(odd) {
+    background-color: #BAE6B3;
+  }
+  div.accordion>button:nth-of-type(even), section>a[role="button"]:nth-of-type(even) {
+    background-color: #D5F5D0;
+    box-shadow: inset 0 30px 60px -30px #BAE6B3,
+                inset 0 -30px 60px -30px #BAE6B3;
+  }
+  .col-12.col-sm-6.float-left {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  div.accordion>button>img {
+    padding-top: 2px;
+    height: 5vh;
+  }
+  object {
+    margin: 15px 0 10px 0;
+    border: 1px solid darkgray;
+  }
+  div.accordion>div>p {
+    font-size: 20px;
+    border-bottom: 2px solid darkgrey;
+  }
+  div.accordion>div>p:last-child {
+    font-size: 20px;
+    border-bottom: none;
+  }
+  .main-arrow{
+    height: 15vh;
+  }
+  /* ---------------game_details css-------------- */
+  .game-det {
+    height: 300px;
+    background-color: #D5F5D0;
+    box-shadow: inset 0 30px 500px -30px #BAE6B3,
+                inset 0 -30px 500px -30px #BAE6B3;
+  }
+  .game-det>div {
+    height: 100px;
+  }
+  .match-result{
+    font-size: 2.3em;
+    text-align: center;
+  }
+  .match-loc{
+    text-align: center;
+  }
+   
+  /* ---------------transitions-------------- */
+  #pages {
+  position: relative;
+  }
+  #pages > section {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  }
+   
+  .in, .out {
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 200ms;
+  }
+   
+  /* Screen pushes out to left */
+  @-webkit-keyframes outToLeft {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(-100%); }
+  }
+  .push.out {
+  -webkit-animation-name: outToLeft;
+  }
+  /* Screen pushes in from the right */
+  @-webkit-keyframes inFromRight {
+  from { -webkit-transform: translateX(100%); }
+  to { -webkit-transform: translateX(0); }
+  }
+  .push.in {
+  -webkit-animation-name: inFromRight;
+  }
+  /* Screen pushes reverse */
+  @-webkit-keyframes inFromLeft {
+  from { -webkit-transform: translateX(-100%); }
+  to { -webkit-transform: translateX(0); }
+  }
+  .push.in.reverse {
+  -webkit-animation-name: inFromLeft;
+  }
+  @-webkit-keyframes outToRight {
+  from { -webkit-transform: translateX(0); }
+  to { -webkit-transform: translateX(100%); }
+  }
+  .push.out.reverse {
+  -webkit-animation-name: outToRight;
+  }
+   
+  /* Giro de flechas selectoras */
+  img.float-right {
+    -moz-transition: transform 0.3s;
+    -webkit-transition: transform 0.3s;
+    transition: transform 0.3s;
+  }
+  .flip {
+    transform: rotate(90deg);
+  }
+   
+  /*-------------------media querys-------------------*/
+  @media (max-width:360px){
+    h1 {
+      font-size: 1.2em;
+      margin: 18px 0;
+    }
+    h2 {
+      font-size: 0.9em;
+      margin: 12px 0;
+    }
+    h3 {
+      line-height: 400%;
+      font-size: 25px;
+    }
+  }
+   
+  @media (orientation: landscape) {
+      section {
+        padding-top: 70px;
+        padding-bottom: 80px;
+      }
+      .fixed-top>div {
+        height: 45px;
+      }
+      .logo {
+        margin: 4px 0;
+      }
+      h1 {
+        margin: 9px 0;
+      }
+      header>div:last-child {
+        height: 25px;
+      }
+      h2 {
+        font-size: 0.9em;
+        margin: 4px 0;
+      }
+      #back-btn {
+        padding: 0 20px 0 60px;
+        height: 26px;
+      }
+      h3 {
+        font-size: 1.3em;
+      }
+      section>a>img {
+        padding-top: 1.5vh;
+      }
+      img.nav-img-footer.shownav {
+        height: 40px;
+      }
+      nav.navbar.navbar-expand.fixed-bottom.justify-content-center {
+        height: 35px;
+      }
+      .game-det {
+        height: 75vh;
+      }
+      .game-det>div{
+        height: 20vh;
+      }
+      section>div>p {
+        line-height: 20px;
+        padding-top: 2px;
+      }
+      div.accordion>button>img {
+        height: 9vh;
+      }
+      .mapp{
+        width: 405px;
+      }
+  }
+   
+  

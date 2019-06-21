@@ -1,0 +1,13 @@
+/*body{
+	background-image: url(../images/imagen1.jpg);
+}*/
+.logo {
+	width: 30%;
+}
+h1{
+	text-decoration: underline;
+	
+}
+.jumbotron{
+	background-color: #6c757d;
+}
