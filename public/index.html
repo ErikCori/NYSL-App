@@ -1,76 +1,148 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NYSL App</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="style/nuevo.css">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/6.2.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/6.2.1/firebase-auth.js"></script>
-    <script defer src="/__/firebase/6.2.1/firebase-database.js"></script>
-    <script defer src="/__/firebase/6.2.1/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/6.2.1/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NYSL App</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="style/style.css">
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-		<div class="container">
+	<!-- update the version number as needed -->
+	<script defer src="/__/firebase/6.2.1/firebase-app.js"></script>
+	<!-- include only the Firebase features as you need -->
+	<script defer src="/__/firebase/6.2.1/firebase-auth.js"></script>
+	<script defer src="/__/firebase/6.2.1/firebase-database.js"></script>
+	<script defer src="/__/firebase/6.2.1/firebase-messaging.js"></script>
+	<script defer src="/__/firebase/6.2.1/firebase-storage.js"></script>
+	<!-- initialize the SDK after all desired features are loaded -->
+	<script defer src="/__/firebase/init.js"></script>
+
+	<style media="screen">
+		body {
+			background: #ECEFF1;
+			color: rgba(0, 0, 0, 0.87);
+			font-family: Roboto, Helvetica, Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		#message {
+			background: white;
+			max-width: 360px;
+			margin: 100px auto 16px;
+			padding: 32px 24px;
+			border-radius: 3px;
+		}
+
+		#message h2 {
+			color: #ffa100;
+			font-weight: bold;
+			font-size: 16px;
+			margin: 0 0 8px;
+		}
+
+		#message h1 {
+			font-size: 22px;
+			font-weight: 300;
+			color: rgba(0, 0, 0, 0.6);
+			margin: 0 0 16px;
+		}
+
+		#message p {
+			line-height: 140%;
+			margin: 16px 0 24px;
+			font-size: 14px;
+		}
+
+		#message a {
+			display: block;
+			text-align: center;
+			background: #039be5;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: white;
+			padding: 16px;
+			border-radius: 4px;
+		}
+
+		#message,
+		#message a {
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+		}
+
+		#load {
+			color: rgba(0, 0, 0, 0.4);
+			text-align: center;
+			font-size: 13px;
+		}
+
+		@media (max-width: 600px) {
+
+			body,
+			#message {
+				margin-top: 0;
+				background: white;
+				box-shadow: none;
+			}
+
+			body {
+				border-top: 16px solid #ffa100;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app" class="container">
 		<header class="row fixed-top">
 			<div class="col-2">
 				<img class="logo" src="style/images/nysl_logo.png">
 			</div>
 			<div class="col-8 text-center">
-				<h1 class="align-middle">Northside Youth Soccer League</h1>
+				<h1 v-show="section == 'home'" class="align-middle">Northside Youth Soccer League</h1>
+				<h1 v-show="section == 'game_info'" class="align-middle">Game Information</h1>
+				<h1 v-show="section == 'game_loc'" class="align-middle">Game Locations</h1>
+				<h1 v-show="section == 'contact'" class="align-middle">Contact</h1>
 			</div>
 			<div class="col-2">
 			</div>
-			<div class="col-12">
-				<a id="bbb" class="anav" href="#home"><img src="style/images/back.png" id="back-btn" class="float-left"></a>
-				
+			<div id="back" class="col-12">
+				<a  v-show="section == 'home'"></a>
+				<a  v-show="section == 'game_info'" onclick="cambiarSection('home')"><img src="style/images/back.png" id="back-btn1" class="float-left"></a>
+				<a  v-show="section == 'game_loc'" onclick="cambiarSection('home')"><img src="style/images/back.png" id="back-btn1" class="float-left"></a>
+				<a  v-show="section == 'contact'" onclick="cambiarSection('home')"><img src="style/images/back.png" id="back-btn1" class="float-left"></a>
 			</div>
 		</header>
-		<div id="pages">
-			<section class="row current" id="home">
-				<a class="col-12 btn btn-dark btn-block anav" href="#game_info" role="button">
+		<div v-show="section == 'home'">
+			<section>
+				<a class="col-12 btn btn-secundary" onclick="cambiarSection('game_info')" role="button">
 					<h3 class="float-left">Game Information</h3>
 				</a>
-				<a class="col-12 btn btn-dark btn-block anav" href="#locations" role="button">
+				<a class="col-12 btn btn-secundary " onclick="cambiarSection('game_loc')" role="button">
 					<h3 class="float-left">Game Locations</h3>
 				</a>
-				<a class="col-12 btn btn-dark btn-block anav" href="#contact" role="button">
+				<a class="col-12 btn btn-secundary" onclick="cambiarSection('contact')" role="button">
 					<h3 class="float-left">Contact</h3>
 				</a>
 			</section>
-			<section class="row" id="game_info">
-				<div class="col-12 col-sm-8 offset-sm-2">
-					<div class="text-center">
-						<select id="dropMonths">
-							<option value="">Select a Month</option>
-						</select>
+		</div>
+		<div v-show="section == 'game_info'">
+			<section>
+				<div class="col-12">
+					<div class="col-12 col-sm-8 offset-sm-2">
+						<div class="text-center">
+							<select id="dropMonths">
+								<option value="september">Select a Month</option>
+							</select>
+						</div>
+						<table class="table table-bordered" id="table-data"></table>
 					</div>
-					<table class="table table-bordered" id="table-data"></table>
 				</div>
 			</section>
-			<section class="row" id="locations">
+		</div>
+		<div v-show="section == 'game_loc'">
+			<section>
 				<div class="col-12 col-sm-8 offset-sm-2 accordion" id="locationAccord">
 					<button class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" id="heading1">
 						<h5 class="float-left pt-1 pl-3">AJ Katzenmaier</h5>
@@ -110,9 +182,10 @@
 					</div>
 				</div>
 			</section>
-
-			<section class="row" id="contact">
-				<div class="col-12 col-sm-8 offset-sm-2">
+		</div>
+		<div v-show="section == 'contact'">
+			<section class="row" id="home">
+				<div class="col-12">
 					<p>
 						<b>More Info:</b> <a href="#">www.nysl.com</a>.<br>
 						<b>Mail to:</b> <a href="mailto:michael.randall@chisoccer.org">Michael Randall, League Coordinator</a>.
@@ -120,56 +193,64 @@
 				</div>
 			</section>
 		</div>
+
 	</div>
-    <!--<div id="message">
+
+	<footer class="col-12 card-footer">
+		<p class="text-center">®2019 FullStack |All Rights Reserved</p>
+	</footer>
+	<!--<div id="message">
       <h2>Welcome</h2>
       <h1>Firebase Hosting Setup Complete</h1>
       <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>-->
-    <p id="load">Firebase SDK Loading&hellip;</p>
-		
-		 <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/6.1.1/firebase-app.js"></script>
+	<p id="load">Firebase SDK Loading&hellip;</p>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="/__/firebase/6.1.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#reserved-urls -->
-     <script src="/__/firebase/6.1.1/firebase-auth.js"></script>
-     <script src="/__/firebase/6.1.1/firebase-firestore.js"></script>
+	<script src="/__/firebase/6.1.1/firebase-auth.js"></script>
+	<script src="/__/firebase/6.1.1/firebase-firestore.js"></script>
 
 
 
-  <!-- Initialize Firebase -->
+	<!-- Initialize Firebase -->
 
-  <script src="/__/firebase/init.js"></script>
+	<script src="/__/firebase/init.js"></script>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+			// // The Firebase SDK is initialized and available here!
+			//
+			// firebase.auth().onAuthStateChanged(user => { });
+			// firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+			// firebase.messaging().requestPermission().then(() => { });
+			// firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+			//
+			// // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-		<script src="script/nysl_partidos.js"></script>
-		<script src="script/main.js"></script>
-		<script src="script/transiciones.js"></script>
-  </body>
+			try {
+				let app = firebase.app();
+				let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+				document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+			} catch (e) {
+				console.error(e);
+				document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+			}
+		});
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+	<script src="script/mainVue.js"></script>
+	<script src="script/nysl_partidos.js"></script>
+	<script src="script/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+	
+</body>
+
 </html>

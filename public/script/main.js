@@ -47,7 +47,10 @@ function crearContenidoTabla(partidos, elemento) {
 		table += '<tr>';
 		table += '<td class="date">' + partido.date + '</td>';
 		table += '<td class="state">' + partido.teams + '</td>';
-		table += '<td class="location">' + partido.location + '</td>';
+		table += 
+			'<td class="location"><a href=' +partido["url-location"]+ '>' + partido.location + 
+			
+			'</td>';
 		table += '<td class="times">' + partido.times + '</td>';
 		table += '</tr>';
 	})
